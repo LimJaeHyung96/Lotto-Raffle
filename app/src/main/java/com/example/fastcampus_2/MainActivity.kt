@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import java.util.*
 
@@ -80,6 +81,8 @@ class MainActivity : AppCompatActivity() {
             textView.isVisible = true
             textView.text = numberPicker.value.toString()
 
+            setNumberBackground(numberPicker.value, textView)
+
             pickNumberSet.add(numberPicker.value)
         }
     }
@@ -93,7 +96,18 @@ class MainActivity : AppCompatActivity() {
                 val textView = numberTextViewList[index]
                 textView.text = number.toString()
                 textView.isVisible = true
+                setNumberBackground(number, textView)
             }
+        }
+    }
+
+    private fun setNumberBackground (number : Int, textView : TextView){
+        when(number){
+            in 1..10 -> textView.background = ContextCompat.getDrawable(this, R.drawable.circle_yellow)
+            in 11..20 -> textView.background = ContextCompat.getDrawable(this, R.drawable.circle_blue)
+            in 21..30 -> textView.background = ContextCompat.getDrawable(this, R.drawable.circle_red)
+            in 31..40 -> textView.background = ContextCompat.getDrawable(this, R.drawable.circle_gray)
+            else -> textView.background = ContextCompat.getDrawable(this, R.drawable.circle_green)
         }
     }
 
